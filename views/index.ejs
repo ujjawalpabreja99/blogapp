@@ -1,0 +1,49 @@
+<% include partials/header %>
+
+<div class="ui main centered container">
+	<div class="ui huge header"><i id="mainicon" class="quote right icon"></i>UBlogs</div>
+	<div class="ui top attached segment">
+		<div class="ui divided items">
+			<% blogs.forEach(function(blog){ %>
+				<div class="item">
+					<div class="image">
+						<img src="<%= blog.image %>"> 
+					</div>
+					<div class="content">
+						<a class="header" href="/blogs/<%= blog._id %>"><%= blog.title %></a>
+						<div class="meta">
+							<span><i><%= blog.created.toDateString() %></i></span>
+						</div>
+						<div class="description">
+							<p>
+								<%- blog.body.substring(0,100)%>
+								<% if(blog.body.length>100) { %>
+								...
+								<% } %>
+							</p>
+						</div>
+						<% if(blog.body.length>100) { %>
+						<div class="extra">
+							<a class="ui vertical animated basic button" href="/blogs/<%= blog._id %>">
+								<div class="visible content">Read More</div>
+    							<div class="hidden content"><i aria-hidden="true" class="down chevron icon"></i></div>
+							</a>	
+						</div>
+						<% } %>
+						<% if(blog.body.length<=100) { %>
+						<div class="extra">
+							<a class="ui vertical animated basic button" href="/blogs/<%= blog._id %>">
+								<div class="visible content">Full Post</div>
+    							<div class="hidden content"><i aria-hidden="true" class="down chevron icon"></i></div>
+							</a>	
+						</div>
+						<% } %>
+					</div>
+				</div>
+			<% }); %>
+		</div>
+	</div>
+</div>
+
+
+<% include partials/footer %>
